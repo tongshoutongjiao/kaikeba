@@ -24,4 +24,32 @@ webpack 是前端的一个项目构建工具，它是基于 Node.js 开发出来
   4. 实例属性 通过实例直接访问属性的
   5. 在webpack中只能处理一部分的es6语法，一些高级的es6或者es7语法是处理不了的，这时候需要借助于第三方的loader来处理这种属性，处理好之后，会打包到bundle.js中。通过babel可以帮我们将高级的语法转换为低级的语法
   ##### vue 里边的render函数
+##### 第三天 1011 签到
+ 1.es6中使用import 和export的方法
+ 2. import 和export default 配套使用
+ 3. module.exports 和 require 配套使用
+ 4 export default 只允许向外暴露一次
+ 5 在一个模块中既可以使用export 也可以使用export default 向外暴露成员
+ 6 export 向外暴露的成员，只能使用{}的形式来接收，这种形式叫做按需导出，必须严格按照导出事后的名称来接收
+ 7 如果export 导出的要起别名，使用 import as 来接收
+ 
+ ###### webpack 和 vue-router 的结合
+ 
+ ##### 常见的浏览器及其内核
+ 1.谷歌 火狐 ie  opera 
+ 2.谷歌内核 ---blink  IE--- Trident firefox ---Gecko  safari --webkit Opera---Presto
+ 3.浏览器内核包括渲染引擎和js引擎
+ 4.2013 年谷歌宣布和webkit终止合作
+ 
+ 
+ ###### Web标准
+ 1. w3c和其他组织制定的
+ 2. 包括三大类，结构(html)，行为(js)和样式（cs）
+ 
+ ##### html（Hyper Text Markup Language）初识
+ 1. html head body 尖括号包括
+ 
+ 
+ 
+ 
   
