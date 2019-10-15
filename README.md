@@ -151,3 +151,8 @@ webpack 是前端的一个项目构建工具，它是基于 Node.js 开发出来
      6. input 属性 value placeholder autofocus multiple(多选) autocomplete
      7. 多媒体 embed 
      8. au dio 音频 video 视频
+#### 1015 签到
+     1.京东实战css项目
+     2. 过渡动画 transition
+     3. 全局样式global.css 基本样式 base.css 页面样式 
+     
