@@ -155,4 +155,20 @@ webpack 是前端的一个项目构建工具，它是基于 Node.js 开发出来
      1.京东实战css项目
      2. 过渡动画 transition
      3. 全局样式global.css 基本样式 base.css 页面样式 
+#### 1016签到
+     ##### 读取文件的过程
+     1. 获取文件 
+     2. 开始读取，创建阅读器 fileReader 
+     3. 读取成功 回调函数
+     ##### canvas 绘图
+     1.获取画布对象 canvas.getContext("2d")
+     2. 落笔  ctx.moveTo(x,y)
+     3. 连线  ctx.lineTo(300,100)
+     4. 描边  ctx.stroke();
+     5. 绘制颜色 宽度 ctx.strokeStyle="red";  ctx.lineWidth="20";
+     6. 收笔 ctx.beginPath();
+     ##### 浏览器存储
+     1. localStorage  sessionStorage
+     2. setItem getItem removeItem clear
+
      
