@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+  <style>
+    .name{
+      font-size: 30px;
+      color: rebeccapurple;
+    }
+  </style>
+</head>
+<body>
+  <input type="button" id="btn" value="点我">
+  <button  id="btn2">点击弹框</button>
+
+  <div id="main">1111</div>
+  <script>
+    // 事件：当什么时候做什么事情
+    //      触发-响应
+    //1 获取按钮
+    var btn = document.getElementById('btn');
+    let btn2=document.querySelector('#btn2')
+    //2 给按钮注册事件
+    //事件名称  click
+    //事件源：谁触发的事件
+    //事件处理函数：
+    btn.onclick = function () {
+      alert('别点我，疼');
+    }
+    
+
+    btn2.onclick=function(e){
+      console.log('点击执行自己添加的按钮事件')
+      btn2.classList.toggle('name');
+    }
+
+
+    // 给div注册事件
+    var div = document.getElementById('main');
+    div.onclick = function () {
+      alert('我是div');
+    }
+  </script>
+</body>
+</html>

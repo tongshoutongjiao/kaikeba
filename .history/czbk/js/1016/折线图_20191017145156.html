@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        #canvas{
+            border: 1px solid red;
+        }
+    </style>
+</head>
+<body>
+    <canvas id="canvas" width="600" height="400"></canvas>
+
+    <script>
+
+        //  获取canvas 画布对象
+        let canvas=document.querySelector('canvas');
+        console.log('查看效果');
+        console.log(canvas);
+
+        //  获取canvas 上下文
+        let  ctx=canvas.getContext('2d');
+
+        // 绘制网格
+        draw();
+
+        ctx.beginPath();
+
+        // 绘制坐标系
+        draw1()
+
+        ctx.beginPath();
+
+        //  随机生成点。首先要确定范围
+        // 水平方向 40-560；
+        // 垂直方向40-360
+
+        let number=random(5,10);
+
+        let ary=[];
+
+        for(let i=0;i<number;i++){
+            let ox=random(40,560);
+            let oy=random(40,360);
+            if(ox==oy){
+                continue;
+            }
+            let obj={
+                ox,oy
+            };
+            ary.push(obj)
+        }
+
+        ctx.fillStyle='red';
+
+        //  开始绘制点
+        for(let i=0;i<number;i++){
+            ctx.beginPath();
+            ctx.moveTo(ary[i].ox-5,ary[i].oy-5);
+            ctx.lineTo(ary[i].ox-5+10,ary[i].oy-5 );
+
+	 	 	 ctx.lineTo(ary[i].ox-5+10,ary[i].oy-5+10);
+
+	 	 	 ctx.lineTo(ary[i].ox-5,ary[i].oy-5+10);
+
+	 	 	 ctx.lineTo(ary[i].ox-5,ary[i].oy-5);
+
+	 	 	 ctx.fill();
+        }
+        ctx.beginPath();
+
+        //  开始连线
+
+        ctx.strokeStyle='red';
+        ctx.moveTo(ary[0].ox,ary[0].oy);
+
+        for(let i=0;i<number;i++){
+            ctx.lineTo(ary[i].ox,ary[i].oy);
+        }
+
+        ctx.stroke();
+
+
+
+
+
+
+
+
+
+        function draw(){
+            console.log('先绘制网格');
+            //  设置每个网格的大小
+            let w_h=20;
+
+            // 计算绘制多少条横线
+            let l_number=canvas.height/w_h;
+            ctx.strokeStyle='#ccc';
+            for(let i=0;i<l_number;i++){
+                ctx.beginPath()
+                ctx.moveTo(0,w_h*i);
+                ctx.lineTo(canvas.width,w_h*i);
+                ctx.stroke();
+            }
+
+            //  计算绘制多少条竖线
+            let v_number=canvas.width/w_h;
+            ctx.strokeStyle='#ccc';
+            for(let i=0;i<v_number;i++){
+                ctx.beginPath();
+                ctx.moveTo(w_h*i,0);
+                ctx.lineTo(w_h*i,canvas.height);
+                ctx.stroke();
+            }
+
+
+        }
+
+        function draw1(){
+            console.log('再绘制坐标系');
+            let pl=20,pr=20,pt=20,pb=20;
+            
+            // 绘制坐标系
+            ctx.moveTo(pl,400-pb);
+            ctx.lineTo(600-pr,400-pb);
+            ctx.strokeStyle='blue';
+            ctx.stroke();
+            ctx.beginPath();
+            ctx.moveTo(pl,400-pb);
+            ctx.lineTo(pl,pt);
+            ctx.stroke();
+
+
+            //  开始绘制三角
+            ctx.beginPath();
+            let t_w=10,t_h=10;
+            ctx.moveTo(pl,pt);
+            ctx.lineTo(pl-t_w/2,pt+t_h);
+            ctx.lineTo(pl+t_w/2,pt+t_h);
+            ctx.lineTo(pl,pt);
+            ctx.fillStyle='blue';
+            ctx.fill();
+
+            ctx.beginPath();
+
+            ctx.moveTo(600-pr,400-pb);
+            ctx.lineTo(600-pr-t_h,400-pb-t_w/2);
+            ctx.lineTo(600-pr-t_h,400-pb+t_w/2);
+            ctx.lineTo(600-pr,400-pb);
+            ctx.fillStyle='blue';
+            ctx.fill();
+
+        }
+
+        function random(min,max){
+            return Math.floor((max-min)*Math.random())+min;
+        }
+    
+    
+    
+    
+    </script>
+    
+</body>
+</html>

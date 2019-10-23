@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style type="text/css">
+        body {
+            font-family: "Helvetica", "Arial", serif;
+            color: #333;
+            background-color: #ccc;
+            margin: 1em 10%;
+        }
+        h2{
+            color: #333;
+            background-color: transparent;
+        }
+        a {
+            color: #c60;
+            background-color: transparent;
+            font-weight: bold;
+            text-decoration: none;
+        }
+
+        
+        #imagegallery a {
+            margin: 0px 20px 20px 0px;
+            padding: 0px;
+            display: inline;
+        }
+
+        #imagegallery a img {
+            border: 0;
+        }
+    </style>
+</head>
+
+<body>
+    <h2>美女画廊</h2>
+    <div id="imagegallery">
+        <a href="images/1.jpg"><img src="images/1-small.jpg" width="100px" alt="美女1"></a>
+        <a href="images/2.jpg"><img src="images/2-small.jpg" alt="美女2" width="100px"></a>
+        <a href="images/3.jpg"><img src="images/3-small.jpg" width="100px" alt="美女3"></a>
+        <a href="images/4.jpg"><img src="images/4-small.jpg" width="100px" alt="美女4"></a>
+    </div>
+    <div style="clear: both;"></div>
+    <img id="image" src="images/placeholder.png" width="450px" alt="" />
+
+    <p id="des">选择一个图片</p>
+
+
+
+    <script>
+        console.log('测试代码');
+
+        let container=document.querySelector('#imagegallery'),
+        oA=container.querySelectorAll('a');
+
+     
+
+
+        for(let i=0;i<oA.length;i++){
+            console.log(oA[i]);
+            oA[i].onclick=function(){
+                console.log(this.href);
+                return false;
+            }
+
+        }
+
+
+
+
+
+
+    </script>
+
+</body>
+
+</html>

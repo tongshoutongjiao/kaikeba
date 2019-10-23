@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        let obj={
+            name:'xxx',
+            age:15,
+            sex:'男',
+            sayHi(){
+                console.log(this.name+':Hello')
+            }
+
+
+        }
+       obj.sayHi()
+
+        for(let key in obj){
+            console.log(key)
+            console.log(obj[key])
+        }
+
+        delete obj.name;
+        console.log(obj);
+    
+    
+    
+    </script>
+    
+</body>
+</html>

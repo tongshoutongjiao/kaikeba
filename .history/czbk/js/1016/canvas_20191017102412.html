@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>canvas 使用方法</title>
+    <style>
+        .name{
+            color: red;
+        }
+    </style>
+</head>
+<body>
+    <canvas id="canvas" width="300" height="300"></canvas>
+    <script type="text/javascript">
+    let canvas=document.getElementById('canvas');
+    console.log(canvas);
+    canvas.classList.add('name');
+    let ctx=canvas.getContext("2d");
+    ctx.moveTo(10,10);
+    ctx.lineTo(10,80);
+    ctx.lineTo(100,80);
+    ctx.lineTo(10,10);
+    ctx.strokeStyle='red';
+    ctx.stroke();
+
+    ctx.beginPath();
+
+    ctx.moveTo(100,100);
+    ctx.lineTo(100,250);
+    ctx.lineTo(200,250);
+    ctx.lineTo(100,100);
+    ctx.strokeStyle='yellow';
+    ctx.stroke();
+ 
+
+
+   
+
+
+
+    </script>
+    
+</body>
+</html>
