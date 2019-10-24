@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+  <style>
+    .gray {
+      color: gray;
+    }
+    .black {
+      color: black;
+    }
+  </style>
+</head>
+<body>
+  <input type="text" class="gray" value="请输入搜索关键字" id="txtSearch"> <input type="button" value="搜索" id="btnSearch">
+
+  <script>
+    var txtSearch = document.getElementById('txtSearch');
+    txtSearch.onfocus = function () {
+      if (this.value === '请输入搜索关键字') {
+        this.value = '';
+        this.className = 'black';
+      } 
+    }
+
+    txtSearch.onblur = function () {
+      if (this.value.length === 0 || this.value === '请输入搜索关键字') {
+        this.value = '请输入搜索关键字';
+        this.className = 'gray';
+      }
+    }
+  </script>
+</body>
+</html>

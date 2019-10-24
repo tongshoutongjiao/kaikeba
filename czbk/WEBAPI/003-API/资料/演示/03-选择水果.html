@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        select {
+            width:200px;
+            height: 200px;
+            background-color: #33cccc;
+            font-size: 20px;
+        }
+    </style>
+</head>
+<body>
+<select id="all" size="5" multiple="multiple">
+
+</select>
+
+<input type="button" value=">>" id="btn1">
+<input type="button" value="<<" id="btn2">
+<input type="button" value=">" id="btn3">
+<input type="button" value="<" id="btn4">
+
+<select id="select" multiple="multiple">
+
+</select>
+
+    <script>
+        var fruits = ["苹果","香蕉","橘子","西瓜","葡萄"];
+
+        //
+        function my$(id) {
+            return document.getElementById(id);
+        }
+
+        //添加所有的水果
+        var all = my$("all");
+        var select = my$("select");
+
+        for (var i = 0; i < fruits.length; i++) {
+            var option = document.createElement("option");
+            all.appendChild(option);
+            //设置option的内容
+            setInnerText(option, fruits[i]);
+        }
+
+
+        //给按钮注册事件
+        var btn1 = my$("btn1");  //全选按钮
+        var btn2 = my$("btn2");  //取消全选按钮
+        var btn3 = my$("btn3");  //选择按钮
+        var btn4 = my$("btn4");  //取消选择按钮
+
+
+        btn1.onclick = function () {
+            //找到选择的option，添加到下一个select中
+            var len = all.children.length;
+            for(var i = 0; i < len; i++) {
+                var option = all.children[0];
+                select.appendChild(option);
+            }
+
+//            select.innerHTML += all.innerHTML;
+//            all.innerHTML = "";
+        }
+
+
+        //取消全选
+        btn2.onclick = function () {
+            var len = select.children.length;
+            for(var i = 0; i < len; i++) {
+                var option = select.children[0];
+                all.appendChild(option);
+            }
+        }
+
+        //选择选中的项
+        btn3.onclick = function () {
+            var array = [];
+            for (var i = all.children.length - 1; i >=0; i--) {
+                var option = all.children[i];
+                if (option.selected) {
+                    array.push(option);
+                    option.selected = false;
+                }
+            }
+            array.reverse();
+            for (var i = 0; i < array.length; i++) {
+                var option = array[i];
+                select.appendChild(option);
+            }
+        }
+
+        //取消选中的项
+        btn4.onclick = function () {
+            var array = [];
+            for (var i = select.children.length - 1; i >=0; i--) {
+                var option = select.children[i];
+                if (option.selected) {
+                    array.push(option);
+                    option.selected = false;
+                }
+            }
+            array.reverse();
+            for (var i = 0; i < array.length; i++) {
+                var option = array[i];
+                all.appendChild(option);
+            }
+        }
+
+
+        function removeElement(element) {
+            element.parentNode.removeChild(element);
+        }
+
+        //设置innerText
+        function setInnerText(element,content) {
+            if (element.textContent) {
+                element.textContent = content;
+            }else{
+                element.innerText = content;
+            }
+        }
+    </script>
+</body>
+</html>
