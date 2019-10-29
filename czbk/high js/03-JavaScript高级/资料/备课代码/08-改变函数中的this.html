@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+</head>
+<body>
+  <div>a</div>
+  <div>b</div>
+  <div>c</div>
+
+  <script>
+    // call  apply  bind
+    function fn(a, b) {
+      console.log(this);
+      console.log(a + b);
+    }
+    var o = {name: 'ls'};
+    fn.call(o, 5, 6);
+    fn.apply(o, [5, 6]);
+
+    
+    var arr = [2, 1, 8, 9, 10, 3];
+    console.log(Math.max.apply(Math, arr));
+    
+    console.log.apply(console, arr);
+
+    var obj = {
+      0: 1,
+      1: 8,
+      2: 10,
+      3: 3,
+      4: 2,
+      length: 5
+    }; 
+    // Array.prototype.splice.call(obj, 0, 1);
+    // Array.prototype.push.call(obj, 100);
+    // console.log(obj);
+
+    var arr = [];
+    var n = Array.prototype.shift.call(obj);
+    Array.prototype.push.call(obj, n);
+    n = Array.prototype.shift.call(obj);
+    Array.prototype.push.call(obj, n);
+    
+    console.log(obj);
+
+
+
+
+    // // 在对象内部使用定时器
+    var o = {
+      name: 'hanmeimei',
+      func1: function () {
+        console.log(this.name);
+      },
+      func2: function () {
+        setInterval(function () {
+            console.log(this);
+        }.bind(this), 2000);
+      }
+    };
+    o.func2();
+
+
+  </script>
+
+
+</body>
+</html>

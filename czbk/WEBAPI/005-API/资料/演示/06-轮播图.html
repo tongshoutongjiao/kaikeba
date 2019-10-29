@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <style type="text/css">
+        * {
+            padding: 0;
+            margin: 0;
+            list-style: none;
+            border: 0;
+        }
+
+        .all {
+            width: 500px;
+            height: 200px;
+            padding: 7px;
+            border: 1px solid #ccc;
+            margin: 100px auto;
+            position: relative;
+        }
+
+        .screen {
+            width: 500px;
+            height: 200px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .screen li {
+            width: 500px;
+            height: 200px;
+            overflow: hidden;
+            float: left;
+        }
+
+        .screen ul {
+            position: absolute;
+            left: 0;
+            top: 0px;
+            width: 3000px;
+        }
+
+        .all ol {
+            position: absolute;
+            right: 10px;
+            bottom: 10px;
+            line-height: 20px;
+            text-align: center;
+        }
+
+        .all ol li {
+            float: left;
+            width: 20px;
+            height: 20px;
+            background: #fff;
+            border: 1px solid #ccc;
+            margin-left: 10px;
+            cursor: pointer;
+        }
+
+        .all ol li.current {
+            background: yellow;
+        }
+
+        #arr {
+            display: none;
+            z-index: 1000;
+
+        }
+
+        #arr span {
+            width: 40px;
+            height: 40px;
+            position: absolute;
+            left: 5px;
+            top: 50%;
+            margin-top: -20px;
+            background: #000;
+            cursor: pointer;
+            line-height: 40px;
+            text-align: center;
+            font-weight: bold;
+            font-family: '黑体';
+            font-size: 30px;
+            color: #fff;
+            opacity: 0.3;
+            border: 1px solid #fff;
+        }
+
+        #arr #right {
+            right: 5px;
+            left: auto;
+        }
+    </style>
+</head>
+<body>
+<div class="all" id='box'>
+    <div class="screen">
+        <ul>
+            <li><img src="images/wf1.jpg" width="500" height="200"/></li>
+            <li><img src="images/wf2.jpg" width="500" height="200"/></li>
+            <li><img src="images/wf3.jpg" width="500" height="200"/></li>
+            <li><img src="images/wf4.jpg" width="500" height="200"/></li>
+            <li><img src="images/wf5.jpg" width="500" height="200"/></li>
+        </ul>
+        <ol>
+        </ol>
+    </div>
+    <div id="arr"><span id="left">&lt;</span><span id="right">&gt;</span></div>
+</div>
+<script src="common.js"></script>
+<script src="animate.js"></script>
+<script>
+   // 获取所有元素
+   var box = my$('box');
+   var screen = box.children[0];
+   var ul = screen.children[0];
+   var ol = screen.children[1];
+
+   // 获取箭头的容器
+   var arr = my$('arr');
+   // 获取箭头
+   var leftArray = my$('left');
+   var rightArray = my$('right');
+
+   //1 动态创建序号
+   var count = ul.children.length;
+   for (var i = 0; i < count; i++) {
+     var li = document.createElement('li');
+     ol.appendChild(li);
+     setInnerText(li, i + 1);
+     // 记录当前序号的索引
+     li.setAttribute('index', i);
+     // 2 点击序号的时候高亮显示
+     li.onclick = liClick;
+     // 默认让第一个序号高亮
+     ol.children[0].style.backgroundColor = 'yellow';
+   }
+   function liClick() {
+     // 让其他li都取消高亮
+     for (var i = 0; i < count; i++) {
+       var li = ol.children[i];
+       li.style.backgroundColor = '';
+     }
+     // 让当前li高亮显示
+     this.style.backgroundColor = 'yellow';
+
+     //切换图片
+     animate(ul, -imgWidth * this.getAttribute('index'));
+
+     // 让index和当前li的索引同步
+     index = this.getAttribute('index');
+   }
+  
+
+   //3 点击箭头切换图片
+   // 3.1 鼠标放到box上显示箭头
+   box.onmouseenter = function () {
+     arr.style.display = 'block';
+
+     clearInterval(timerId);
+   }
+   box.onmouseleave = function () {
+     arr.style.display = 'none';
+     timerId = setInterval(function () {
+      rightArray.click();
+     }, 2000);
+   }
+
+  // 图片的宽度
+  var imgWidth = screen.offsetWidth;
+  var index = 0;
+  // 下一张
+  rightArray.onclick = function () {
+    if (index === count) {
+      index = 0;
+      ul.style.left = '0px';
+    }
+
+    index ++;
+    if (index < count) {
+      ol.children[index].click();
+    } else {
+      animate(ul, -index * imgWidth);
+      // 让其他li都取消高亮
+      for (var i = 0; i < count; i++) {
+       var li = ol.children[i];
+       li.style.backgroundColor = '';
+      }
+      ol.children[0].style.backgroundColor = 'yellow';
+    }
+  }
+  // 上一张
+  leftArray.onclick = function () {
+    if (index === 0) {
+      index = count;
+      ul.style.left = -count * imgWidth + 'px';
+    }
+    index--;
+    if (index != 0) {
+      ol.children[index].click();
+    } else {
+      animate(ul, -index * imgWidth);
+      // 让其他li都取消高亮
+      for (var i = 0; i < count; i++) {
+       var li = ol.children[i];
+       li.style.backgroundColor = '';
+      }
+      ol.children[0].style.backgroundColor = 'yellow';
+    }
+  }
+
+  //4 无缝滚动
+  var firstLi = ul.children[0];
+  var cloneLi = firstLi.cloneNode(true);
+  ul.appendChild(cloneLi);
+
+  // 5 自动滚动
+  var timerId = setInterval(function () {
+    rightArray.click();
+  }, 2000);
+
+</script>
+</body>
+</html>

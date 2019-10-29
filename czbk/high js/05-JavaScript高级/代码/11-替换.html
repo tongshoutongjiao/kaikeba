@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    // 1. 替换所有空白
+    var str = "   123AD  asadf     asadfasf  adf ";
+    // trim() 去除前后的空格
+    // console.log( str.trim());
+    // replace() 只能替换掉第一个查找到的内容
+    // console.log(str.replace(' ', 'x'));
+
+    // console.log(str.replace(/\s/g, ''));
+
+
+    // console.log(str.split(' ').join(''));
+ 
+    // 2. 把所有,和，替换为.
+    var str = "abc,efg,123，abc,123，a";
+
+    console.log(str.replace(/,|，/g, '.'));
+
+
+  </script>
+</body>
+</html>

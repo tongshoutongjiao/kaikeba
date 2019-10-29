@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    function Hero(name, blood, weapon) {
+      // 实例成员  /  对象成员   --  跟对象相关的成员，将来使用对象的方式来调用
+      this.name = name;
+      this.blood = blood;
+      this.weapon = weapon;
+
+      this.attack = function () {
+        console.log(this.weapon + ' 攻击敌人');
+      }
+    } 
+
+    // 静态成员  -- 直接给构造函数添加的成员
+    Hero.version = '1.0';
+    
+
+    var hero = new Hero('刘备', 100, '剑');
+    hero.attack();
+
+    var hero1 = new Hero('关羽', 100, '刀');
+    hero1.attack();
+    // 静态成员不能使用对象的方式来调用
+    console.log(hero.version);
+
+    // 静态成员使用构造函数来调用
+    console.log(Hero.version);
+  </script>
+</body>
+</html>

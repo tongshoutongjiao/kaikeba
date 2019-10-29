@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    console.log(111)
+
+    for(var i = 0; i < 3; i++) {
+      (function (n) {
+        setTimeout(function () {
+          console.log(n)
+        }, 0)
+      })(i);
+      
+    }
+    console.log(222)
+
+
+
+    // console.log(111)
+
+    // for(var i = 0; i < 3; i++) {
+    //   (function (i) {
+    //     setTimeout(function () {
+    //       console.log(i)
+    //     }, 0)
+    //   })(i)
+    // }
+    // console.log(222)
+  </script>
+</body>
+</html>

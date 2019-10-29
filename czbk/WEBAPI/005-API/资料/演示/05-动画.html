@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+  <style>
+    #box {
+      position: absolute;
+      width: 100px;
+      height: 100px;
+      background-color: red;
+    }
+  </style>
+</head>
+<body>
+  <input type="button" value="动画 400" id="btn1">
+  <input type="button" value="动画 800" id="btn2">
+
+  <div id="box"></div>
+  <script src="common.js"></script>
+  <script src="animate.js"></script>
+  <script>
+    var box = my$('box');
+    my$('btn1').onclick = function () {
+      animate(box, 400);
+    }
+    my$('btn2').onclick = function () {
+      animate(box, 800);
+    }
+  </script>
+</body>
+</html>

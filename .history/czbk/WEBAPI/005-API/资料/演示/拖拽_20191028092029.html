@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>自己手写拖拽</title>
+    <style>
+        body{
+            padding: 0;
+            margin: 0;
+        }
+        #box{
+            width: 200px;
+            height: 200px;
+            background: lightcoral;
+            position: absolute;
+            left:100px;
+            top: 100px;
+        }
+    </style>
+</head>
+<body>
+    <div id="box"> </div>
+    <script type="text/javascript">
+    let $box=document.getElementById('box');
+
+    //  思路： 
+    // 1 给盒子绑定onMouseDown 事件，用户点击鼠标的时候。
+    // 2 想办法获取到鼠标在页面中的位置,然后获取到盒子在页面中的位置
+    // 3 onmouseMove 的时候，触发事件，让盒子的左边距等于鼠标的位置减去鼠标在盒子中的位置 
+
+
+
+    $box.onmousedown=function(e){
+        console.log(e);
+        e=e||window.event;
+ 
+        let pageX=e.pageX-$box.offsetLeft,
+        pageY=e.pageY-$box.offsetTop;
+        
+        //  求出鼠标在盒子中的位置 x,y
+        let posX=e.pageY-pageX,
+        posY=e.pageY-pageY;
+        console.log(posX,posY)
+
+        this.onmousemove=function(e){
+            console.log('onmouse move');
+            console.log(e.pageY-posY);
+            this.style.left=(e.pageX-posX)+'px';
+            this.style.top=(e.pageY-posY)+'px';
+
+        }
+    }
+
+    $box.onmouseup=function(){
+        this.onmousemove=null;
+    }
+    $box.onmouseover=function(){
+        this.onmousemove=null;
+    }
+
+
+
+        
+        
+        
+        
+        
+     </script>
+    
+</body>
+</html>

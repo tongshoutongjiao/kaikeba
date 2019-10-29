@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    // 函数作为参数
+    // Array.prototype.mySort = function (callback) {
+    //   for (var i = 0; i < this.length - 1; i++) {
+    //     for (var j = 0; j < this.length - i - 1; j++) {
+    //       if (callback(this[j], this[j + 1]) > 0) {
+    //         var tmp = this[j];
+    //         this[j] = this[j + 1];
+    //         this[j + 1] = tmp;
+    //       }
+    //     }
+    //   }
+    // }
+
+    // var arr = [3, 1, 2, 6, 4];
+    // arr.mySort(function (n1, n2) {
+    //   return n1 - n2;
+    // });
+
+    // console.log(arr);
+
+
+    // 函数作为返回值
+    var arr = [];
+    var obj = {};
+    console.log(Object.prototype.toString.call(obj));
+
+    function getFn(type) {
+      return function (obj) {
+        return Object.prototype.toString.call(obj) === type;
+      }
+    }
+
+    var isArray = getFn('[object Array]');
+    var isObject = getFn('[object Object]');
+
+    console.log(isArray(arr));
+    console.log(isObject(obj));
+
+
+    function Person() {
+      this.toString = function () {
+        return '[object Person]';
+      }
+    }
+  </script>
+</body>
+</html>
