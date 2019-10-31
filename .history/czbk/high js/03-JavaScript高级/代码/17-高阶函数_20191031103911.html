@@ -58,23 +58,22 @@
     // 2 函数作为返回值的时候
     
     // 写一个函数，生成1-10之间的随机整数
-    // function getRandom() {
-    //   return parseInt(Math.random() * 10) + 1;
-    // }
-    // console.log(getRandom());
+    function getRandom() {
+      return parseInt(Math.random() * 10) + 1;
+    }
+    console.log(getRandom());
 
-    // // 写一个函数，生成1-10之间的随机整数
-    // // 第一次调用生成随机数，以后每次调用都返回第一次的随机值
+    // 写一个函数，生成1-10之间的随机整数
+    // 第一次调用生成随机数，以后每次调用都返回第一次的随机值
 
-    // function getRandom() {
-    //   var random = parseInt(Math.random() * 10) + 1;
-    //   return function () {
-    //     return random;
-    //   }
-    // }
+    function getRandom() {
+      var random = parseInt(Math.random() * 10) + 1;
+      return function () {
+        return random;
+      }
+    }
 
-    // var fn = getRandom();
-    // fn()
+    var fn = getRandom();
 
     // console.log(fn());
     // console.log(fn());
@@ -86,19 +85,19 @@
     // 1000 + m
     // 10000 + m
 
-    function getFun(n) {
-      return function (m) {
-        return n + m;
-      }
-    }
+    // function getFun(n) {
+    //   return function (m) {
+    //     return n + m;
+    //   }
+    // }
 
-    // 求 100 + m
-    var fn100 = getFun(100);
-    // 求 1000 + m
-    var fn1000 = getFun(1000);
+    // // 求 100 + m
+    // var fn100 = getFun(100);
+    // // 求 1000 + m
+    // var fn1000 = getFun(1000);
 
-    console.log(fn100(1));
-    console.log(fn1000(1));
+    // console.log(fn100(1));
+    // console.log(fn1000(1));
     
   </script>
 </body>
