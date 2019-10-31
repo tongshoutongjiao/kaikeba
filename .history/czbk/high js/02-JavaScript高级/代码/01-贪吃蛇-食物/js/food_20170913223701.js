@@ -26,7 +26,6 @@
 
   // 渲染
   Food.prototype.render = function (map) {
-    
     // 删除之前创建的食物
     remove();
 
@@ -37,7 +36,7 @@
     // 动态创建div  页面上显示的食物
     var div = document.createElement('div');
     map.appendChild(div);
-  
+
     elements.push(div);
 
     // 设置div的样式

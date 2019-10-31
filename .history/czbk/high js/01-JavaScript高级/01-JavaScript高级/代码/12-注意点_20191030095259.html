@@ -12,18 +12,17 @@
       this.age = age;
     }
     // 一般情况下，对象的方法在构造函数的原型对象中来设置
-    // Student.prototype.sayHi = function () {
-    //   console.log('sayHi');
-    // }
-    // Student.prototype.eat = function () {
-    // }
+    Student.prototype.sayHi = function () {
+      console.log('sayHi');
+    }
+    Student.prototype.eat = function () {
+    }
     // 
     // 
     
     var stu = new Student('ls', 18);
 
     console.dir(stu);
-    console.log(stu.constructor);
     stu.sayHi();
 
 

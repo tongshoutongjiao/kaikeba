@@ -26,7 +26,6 @@
 
   // 渲染
   Food.prototype.render = function (map) {
-    
     // 删除之前创建的食物
     remove();
 
