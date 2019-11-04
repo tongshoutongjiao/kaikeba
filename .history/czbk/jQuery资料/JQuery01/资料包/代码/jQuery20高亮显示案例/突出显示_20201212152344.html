@@ -41,19 +41,16 @@
     <script src="jquery-1.12.2.js"></script>
     <script>
         $(function () {
-            console.log('哈哈哈哈');
-            $('.wrap>ul>li').mouseover(function(){
-                console.log('进入li');
-                $(this).siblings("li").css('opacity',0.5);
-                $(this).css('opacity',1)
-              
-            })
-
-            $('.wrap').mouseout(function(){
-                $(this).find('li').css('opacity',1)
-            })
-
-           
+            //鼠标进入的时候,当前的li的透明度为1,其他的li标签透明度,0.5
+            $(".wrap>ul>li").mouseover(function () {
+                //当前的li的兄弟元素的透明度变暗
+                    $(this).siblings("li").css("opacity",0.5);
+                $(this).css("opacity",1);
+            });
+            $(".wrap").mouseout(function () {
+                //.find()方法,针对当前的元素找里面的一些其他的元素
+                $(this).find("li").css("opacity",1);
+            });
         });
     </script>
 </head>

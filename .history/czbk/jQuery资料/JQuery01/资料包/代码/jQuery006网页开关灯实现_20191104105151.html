@@ -24,22 +24,20 @@
     <script src="jquery-1.12.2.js"></script>
     <script>
         //页面的加载事件
-        $(function () {
-            //获取按钮,注册点击事件
-            $("#btn").click(function () {
-                //.val()方法--->获取按钮的value属性的值
-                //.val("内容");是设置按钮的value属性的值
-                console.log('查看开关灯效果');
-                console.log($(this).val())
-                if($(this).val()=="关灯"){
-                    $("body").css("backgroundColor","yellow");
-                    $(this).val("开灯");
-                }else{
-                    $("body").css("backgroundColor","red");
-                    $(this).val("关灯");
-                }
-            });
-        });
+        // $(function () {
+        //     //获取按钮,注册点击事件
+        //     $("#btn").click(function () {
+        //         //.val()方法--->获取按钮的value属性的值
+        //         //.val("内容");是设置按钮的value属性的值
+        //         if($(this).val()=="关灯"){
+        //             $("body").css("backgroundColor","black");
+        //             $(this).val("开灯");
+        //         }else{
+        //             $("body").css("backgroundColor","white");
+        //             $(this).val("关灯");
+        //         }
+        //     });
+        // });
     </script>
 </head>
 <body>

@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>promise 的应用</title>
+</head>
+<body>
+
+    <script type="text/javascript"> 
+    function fn(){
+        return new Promise(function (resolve,reject) {
+            setTimeout(()=>{
+
+                console.log('执行第一步');
+                let a='执行第二步'
+
+                resolve(a)
+
+            },1000)
+          })
+    }
+
+    fn().then(res=>{
+        setTimeout(()=>{
+            console.log(res)
+
+        },1000)
+       
+    })
+
+    //  封装一个axios 模拟前后台交互效果
+    
+
+
+
+
+
+    </script>
+    
+</body>
+</html>

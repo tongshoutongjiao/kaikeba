@@ -42,17 +42,6 @@
     <script>
         $(function () {
             console.log('哈哈哈哈');
-            $('.wrap>ul>li').mouseover(function(){
-                console.log('进入li');
-                $(this).siblings("li").css('opacity',0.5);
-                $(this).css('opacity',1)
-              
-            })
-
-            $('.wrap').mouseout(function(){
-                $(this).find('li').css('opacity',1)
-            })
-
            
         });
     </script>

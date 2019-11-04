@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>promise 的应用</title>
+</head>
+<body>
+
+    <script type="text/javascript"> 
+    function fn(){
+        return new Promise(function (resolve,reject) {
+            setTimeout(()=>{
+
+                console.log('执行第一步');
+                let a='执行第二步'
+
+                resolve(a)
+
+            },1000)
+          })
+    }
+
+    fn().then(res=>{
+        setTimeout(()=>{
+            console.log(res)
+
+        },1000)
+       
+    })
+
+    //  封装一个axios 模拟前后台交互效果
+
+    function getUserInfo({param}) {
+        return new Promise(
+           (resolve,reject)=>{
+            // 回去后台请求数据，将接口返回来的数据全部打印出来
+            let res={
+                code:500,
+                data:[
+                    {name:'zhl',age:'23',hobby:'code'},
+                    {name:'syt',age:'24',hobby:'code'},
+                    {name:'sxl',age:'25',hobby:'code'},
+                    {name:'zhj',age:'26',hobby:'code'}
+                ]
+            }
+
+            setTimeout(()=>{
+                resolve(res);
+            },3000)
+
+           
+           }
+        ).then(res=>res.data,err=>err)
+      }
+
+
+      getUserInfo({id:'xxx'}).then(res=>{
+          console.log(res)
+      })
+
+
+
+
+
+
+    </script>
+    
+</body>
+</html>
