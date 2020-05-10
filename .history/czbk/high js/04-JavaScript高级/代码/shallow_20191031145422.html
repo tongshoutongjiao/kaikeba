@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        let obj1={
+            name:'zhl',
+            age:28,
+            hobby:['code','music','movies'],
+            family:{
+                member:3
+            }
+        }
+
+        let obj2={
+            name:'syt',
+            age:29,
+            hobby:['play','game','eat'],
+            family:{
+                member:'4'
+            }
+        }
+
+// 浅拷贝
+        // function shallowCopy(obj1,obj2){
+        //     for(let key in obj1){
+        //         obj2[key]=obj1[key]
+        //     }
+        // }
+        // shallowCopy(obj1,obj2);
+
+
+        function deepCopy(obj1,obj2){
+            for(let key in obj1){
+                let item=obj1[key];
+
+                if(item instanceof 'Object'){
+                    obj2[key]={};
+                    deepCopy(item,obj2[key])
+                }else if(item instanceof 'Array'){
+                    obj2[key]=[];
+                    deepCopy(item,obj2[key]);
+                }else{
+                    obj2[key]=item;
+                }
+            }
+        }
+
+        deepCopy(obj1,obj2)
+        
+
+
+
+
+    
+    
+    
+    </script>
+</body>
+</html>

@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+
+    //     获取日期中的指定部分
+    let d=new Date();
+    console.log(d.getFullYear());
+    console.log(d.getDate());
+    console.log(d.getMonth())
+    console.log(d.getMinutes());
+    console.log(d.getSeconds());
+
+    function formatDate(date){
+
+        if(!date instanceof Date){
+            console.err('请输入正确的日期格式') 
+        }
+
+        let year=date.getFullYear();
+        let month=date.getMonth()+1;
+        let day=date.getDate();
+        let sec=date.getSeconds();
+        let hour=date.getHours();
+        let min=date.getMinutes();
+        return ''
+
+
+    }
+    formatDate(new Date())
+
+
+
+
+
+    </script>
+    
+</body>
+</html>

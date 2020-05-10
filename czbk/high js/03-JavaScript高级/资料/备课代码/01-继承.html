@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    // 1 继承演示（对象的继承）
+    function extend(child, parent) {
+      for (var key in parent) {
+        if (child[key]) continue;  // 如果child中有该成员，不替换成parent对象中的成员
+        child[key] = parent[key];
+      }
+    }
+
+    var parent = {
+      name: '王健林',
+      age: 60,
+      house: '别墅',
+      money: 1000000,
+      car: '玛莎拉蒂',
+      play: function () {
+        console.log('弹吉他');
+      }
+    };
+
+    var child = {
+      name: '王思聪',
+      age: 18
+    };
+    // 把parent对象的所有成员 拷贝到 child对象上 （实现继承）
+    extend(child, parent);
+
+    console.log(parent);
+    console.log(child);
+  </script>
+</body>
+</html>

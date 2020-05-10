@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        #canvas{
+            border: 1px solid red;
+        }
+    </style>
+</head>
+<body>
+    <canvas id="canvas" width="600" height="400"></canvas>
+
+    <script>
+
+        //  获取canvas 画布对象
+        let canvas=document.querySelector('canvas');
+        console.log('查看效果');
+        console.log(canvas);
+
+        //  获取canvas 上下文
+        let  ctx=canvas.getContext('2d');
+
+        // 绘制网格
+        draw();
+
+        ctx.beginPath();
+
+        // 绘制坐标系
+        draw1()
+
+        ctx.beginPath();
+
+        //  
+
+
+        function draw(){
+            console.log('先绘制网格');
+            //  设置每个网格的大小
+            let w_h=20;
+
+            // 计算绘制多少条横线
+            let l_number=canvas.height/w_h;
+            ctx.strokeStyle='#ccc';
+            for(let i=0;i<l_number;i++){
+                ctx.beginPath()
+                ctx.moveTo(0,w_h*i);
+                ctx.lineTo(canvas.width,w_h*i);
+                ctx.stroke();
+            }
+
+
+
+        }
+
+        function draw1(){
+            console.log('再绘制坐标系');
+        }
+
+    
+    
+    
+    
+    
+    </script>
+    
+</body>
+</html>

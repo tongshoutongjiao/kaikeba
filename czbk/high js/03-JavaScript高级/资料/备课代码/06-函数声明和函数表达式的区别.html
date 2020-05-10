@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    // if语句中的函数声明，不进行提升
+    // 老版本的IE会函数提升，新版本的浏览器不会提升
+    var condition = true;
+    if (condition) {
+      function fn() {
+        console.log('yes');
+      }
+    } else {
+      var n = 5;
+      function fn() {
+        console.log('no');
+      }
+    }
+    fn();
+    console.log(n);
+    // 
+    // 如果根据条件创建函数可以使用 函数表达式
+    // var fn;
+    // var condition = true;
+    // if (condition) {
+    //   fn = function () {
+    //     console.log('yes');
+    //   }
+    // } else {
+    //   fn = function () {
+    //     console.log('no');
+    //   }
+    // }
+    // fn();
+
+
+
+
+
+
+
+  </script>
+</body>
+</html>

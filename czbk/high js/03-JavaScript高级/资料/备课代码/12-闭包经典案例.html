@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+</head>
+<body>
+  <ul id="mv">
+    <li>aaa</li>
+    <li>bbb</li>
+    <li>ccc</li>
+    <li>ddd</li>
+  </ul>
+  <script>
+    var ul = document.getElementById('mv');
+    var i = 0, len = ul.children.length;
+    for (; i < len; i++) {
+      var li = ul.children[i];
+      (function (i) {
+        li.onclick = function () {
+          console.log(i);
+        };
+      })(i);
+    }
+
+
+  </script>
+</body>
+</html>

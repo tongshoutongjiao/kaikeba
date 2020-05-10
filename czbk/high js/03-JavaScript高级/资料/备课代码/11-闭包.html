@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    function makeFunc() {
+      var name = "Mozilla";
+      function displayName() {
+        alert(name);
+      }
+      return displayName;
+    }
+
+    var myFunc = makeFunc();
+    myFunc();
+
+
+    
+    // 闭包  closure package
+    function fn() {
+      var msg = 'hello world';
+
+      // function inner() {
+      //   return msg;
+      // }
+
+      return {
+        get: function () {
+          return msg;
+        },
+        set: function (value) {
+          msg = value;
+        }
+      };
+    }
+
+    var o = fn();
+
+    o.set('abcd');
+    console.log(o.get());
+  </script>
+</body>
+</html>

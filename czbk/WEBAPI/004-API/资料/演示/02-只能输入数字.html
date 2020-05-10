@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+</head>
+<body>
+  <input id="txt" type="text">
+  <script>
+    var txt = document.getElementById('txt');
+    txt.onkeydown = function (e) {
+      e = e || window.event;
+      console.log(e.keyCode);
+      if ((e.keyCode < 48 || e.keyCode > 57) && e.keyCode != 8) {
+        e.preventDefault();
+      } 
+    }
+  </script>
+</body>
+</html>

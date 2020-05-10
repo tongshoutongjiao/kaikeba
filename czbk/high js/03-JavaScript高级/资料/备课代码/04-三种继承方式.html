@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    // 1 原型链继承
+    function Super() {
+      this.color = 'red';
+    }
+    function Sub() {
+    }
+
+    Sub.prototype = new Super();
+    Sub.prototype.constructor = Super;
+
+    var sub = new Sub();
+    console.log(sub.color);
+
+    // 问题：无法设置构造函数的参数
+    
+    // 2 借用构造函数继承
+    function Person(name, age, sex) {
+      this.name = name;
+      this.age = age;
+      this.sex = sex;
+    }
+    function Student(name, age, sex, score) {
+      Person.call(this, name, age, sex);
+      this.score = score;
+    }
+    var stu = new Student('zs', 18, '男', 100);
+    console.log(stu);
+    // 
+    // 问题：无法复用函数
+    // 
+    // 3 组合式继承
+    // 组合式继承
+    function Person(name, age, sex) {
+      this.name = name;
+      this.age = age;
+      this.sex = sex;
+    }
+
+    Person.prototype.sayHi = function () {
+      console.log(this.name);
+    }
+
+    function Student(name, age, sex, score) {
+      Person.call(this, name, age, sex);
+      this.score = score;
+    }
+
+    Student.prototype = Person.prototype;
+    Student.prototype.constructor = Student;
+
+    Student.prototype.hi = function () {
+      console.log('hi');
+    }
+
+    var stu = new Student('zs', 18, '男', 100);
+    console.dir(stu);
+
+
+    var p = new Person('ls', 19);
+    console.dir(p);
+  </script>
+</body>
+</html>

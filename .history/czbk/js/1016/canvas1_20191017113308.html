@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>动画矩形</title>
+    <style>
+        #canvas{
+            border: 1px solid red;
+        }
+    </style>
+</head>
+<body>
+    <canvas id="canvas" width="500" height="800"></canvas>
+    
+    <script>
+        let canvas=document.getElementById('canvas');
+        console.log('查看canvas')
+        console.log(canvas);
+        //  思路: 
+        //  1 先画出矩形  2 设置一个定时器，每隔一段时间改变一下 所画矩形的位置 3 到达边界的时候改变所画矩形的方向  每次画完之后直接清楚canvas屏幕内的图案
+
+        let ctx=canvas.getContext('2d');
+        let step=5,i,x=50;
+
+      
+
+        setInterval(function(){
+            console.log('开始绘制');
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            
+            ctx.fillStyle='yellow';
+         
+
+            if(x+step<canvas.width){
+                i=-1;
+            }else if(x<0){
+                i=1;
+            }
+            x=x+step*i;
+            ctx.fillRect(x,50,80,100);
+
+
+        },20)
+
+        
+
+
+
+
+
+
+
+
+
+    </script>
+</body>
+</html>

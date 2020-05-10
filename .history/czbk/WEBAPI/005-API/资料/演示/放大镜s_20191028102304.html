@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>手写放大镜效果</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        .box{
+            width: 350px;
+            height: 350px;
+            margin: 100px;
+            border: 1px solid #ccc;
+            position: relative;
+        }
+
+        .big {
+            width: 400px;
+            height: 400px;
+            position: absolute;
+            top: 0;
+            left: 360px;
+            border: 1px solid #ccc;
+            overflow: hidden;
+            display: none;
+        }
+
+        .big img {
+            position: absolute;
+        }
+
+        .mask {
+            width: 175px;
+            height: 175px;
+            background: rgba(255, 255, 0, 0.4);
+            position: absolute;
+            top: 0px;
+            left: 0px;
+            cursor: move;
+            display: none;
+        }
+        .small {
+            position: relative;
+        }
+
+
+    </style>
+</head>
+<body>
+    <div class="box" id="box">
+        <div class="small">
+            <img src="./images/small.webp" width="350" alt="">
+            <div class="mask"></div>
+
+        </div>
+        <div class="big">
+            <img src="./images/big.jpg" width="800" alt="">
+        </div>
+
+    </div>
+    <script src="common.js"></script>
+
+
+    <script>
+        let box=document.getElementById('box');
+        let small=box.children[0];
+        let big=box.children[1];
+
+        let mask=small.children[1];
+        let bigImg=big.children[0];
+
+        box.onmouseenter=function(){
+            mask.style.display='block';
+            big.style.display='block';
+
+        }
+
+        box.onmouseleave = function () {
+        mask.style.display = "none";
+        //隐藏大图片
+        big.style.display = "none";
+    }
+    //2 鼠
+
+
+
+
+        </script>
+    
+</body>
+</html>

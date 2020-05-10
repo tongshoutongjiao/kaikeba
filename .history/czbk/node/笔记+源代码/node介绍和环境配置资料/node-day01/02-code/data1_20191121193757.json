@@ -1,0 +1,6 @@
+let obj={
+    "username":"张三",
+    "age":"12"
+}
+
+exports obj;

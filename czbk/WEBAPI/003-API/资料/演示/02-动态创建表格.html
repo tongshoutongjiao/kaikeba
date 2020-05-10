@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        table {
+            border-collapse: collapse;
+        }
+    </style>
+    
+</head>
+<body>
+    <div id="box">
+
+
+    </div>
+    <script>
+        var heads = ["姓名", "学科", "成绩", "操作"];
+
+        var datas = [
+            {"name":"张三1","subject":"语文1","score":99.8},
+            {"name":"张三2","subject":"语文2","score":80.8},
+            {"name":"张三3","subject":"语文3","score":70.8},
+            {"name":"张三4","subject":"语文4","score":100},
+            {"name":"张三5","subject":"语文5","score":60},
+            {"name":"张三6","subject":"语文6","score":70},
+            {"name":"张三7","subject":"语文7","score":89.8}
+        ];
+
+        //创建table
+        //创建表头  thead
+        var table = createTable();
+        //创建数据行  tbody
+        createRows(table);
+
+        //创建表格和表头
+        function createTable() {
+            //创建table
+            var box = document.getElementById("box");
+
+            var table = document.createElement("table");
+            table.border = "1px";
+            table.width = "400px";
+            box.appendChild(table);
+
+            //创建表头
+            var thead = document.createElement("thead");
+            table.appendChild(thead);
+
+            var tr = document.createElement("tr");
+            thead.appendChild(tr);
+            tr.style.height = "40px";
+            tr.style.backgroundColor = "lightgray";
+
+            heads.forEach(function (item, index) {
+                var th = document.createElement("th");
+                tr.appendChild(th);
+                setInnerText(th, item);
+            });
+            return table;
+        }
+        //创建数据行
+        function createRows(table) {
+            var tbody = document.createElement("tbody");
+            table.appendChild(tbody);
+            tbody.style.textAlign = "center";
+
+            datas.forEach(function (item, index) {
+                var tr = document.createElement("tr");
+                tbody.appendChild(tr);
+
+                for (var key in item) {
+                    var td = document.createElement("td");
+                    tr.appendChild(td);
+                    setInnerText(td,item[key]);
+                }
+
+                td = document.createElement('td');
+                tr.appendChild(td);
+
+                var link = document.createElement('a');
+                td.appendChild(link);
+                link.href = 'javascript:void(0)';
+                setInnerText(link, '删除');
+
+                link.onclick = linkDelete;
+            });
+        }
+        function linkDelete() {
+          this.parentNode.parentNode.parentNode.removeChild(this.parentNode.parentNode);  
+        }
+        //设置innerText
+        function setInnerText(element,content) {
+            if (typeof element.textContent === 'string') {
+                element.textContent = content;
+            }else{
+                element.innerText = content;
+            }
+        }
+    </script>
+</body>
+</html>

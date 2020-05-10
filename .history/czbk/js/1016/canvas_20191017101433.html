@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>canvas 使用方法</title>
+    <style>
+        .name{
+            color: red;
+        }
+    </style>
+</head>
+<body>
+    <canvas id="cxt" width="300" height="300"></canvas>
+    <script type="text/javascript">
+    let cxt=document.getElementById('cxt');
+    console.log(cxt);
+    cxt.classList.add('name');
+    let ctx=cxt.getContext("2d");
+
+    ctx.fillRect(0,0,80,80);
+
+   
+
+
+
+    </script>
+    
+</body>
+</html>

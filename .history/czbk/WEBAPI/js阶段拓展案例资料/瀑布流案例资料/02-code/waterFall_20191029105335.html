@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        .itemBox {
+            width: 1050px;
+            margin: 0 auto;
+            position: relative;
+        }
+
+        .item {
+            border: 1px solid #ccc;
+            padding: 4px;
+            position: absolute;
+        }
+    </style>
+</head>
+<body>
+        <div class="itemBox">
+                <div class="item">
+                    <img src="./images/P_000.jpg" alt="">
+                </div>
+                <div class="item">
+                    <img src="./images/P_001.jpg" alt="">
+                </div>
+                <div class="item">
+                    <img src="./images/P_002.jpg" alt="">
+                </div>
+                <div class="item">
+                    <img src="./images/P_003.jpg" alt="">
+                </div>
+                <div class="item">
+                    <img src="./images/P_004.jpg" alt="">
+                </div>
+                <div class="item">
+                    <img src="./images/P_005.jpg" alt="">
+                </div>
+                <div class="item">
+                    <img src="./images/P_006.jpg" alt="">
+                </div>
+                <div class="item">
+                    <img src="./images/P_007.jpg" alt="">
+                </div>
+                <div class="item">
+                    <img src="./images/P_008.jpg" alt="">
+                </div>
+                <div class="item">
+                    <img src="./images/P_009.jpg" alt="">
+                </div>
+                <div class="item">
+                    <img src="./images/P_000.jpg" alt="">
+                </div>
+                <div class="item">
+                    <img src="./images/P_001.jpg" alt="">
+                </div>
+                <div class="item">
+                    <img src="./images/P_002.jpg" alt="">
+                </div>
+                <div class="item">
+                    <img src="./images/P_003.jpg" alt="">
+                </div>
+                <div class="item">
+                    <img src="./images/P_004.jpg" alt="">
+                </div>
+                <div class="item">
+                    <img src="./images/P_005.jpg" alt="">
+                </div>
+                <div class="item">
+                    <img src="./images/P_006.jpg" alt="">
+                </div>
+                <div class="item">
+                    <img src="./images/P_007.jpg" alt="">
+                </div>
+                <div class="item">
+                    <img src="./images/P_008.jpg" alt="">
+                </div>
+                <div class="item">
+                    <img src="./images/P_009.jpg" alt="">
+                </div>
+            </div>
+            <script>
+                window.onload=function(){
+                    /* 
+                    思路分析：
+                    1 获取到itemBox宽度
+                    2 获取到 item的宽度
+                    3 求出列数
+                    4 求出间距
+                    5 实现瀑布流布局的方法
+                    6 滚动页面 加载数据
+                     */
+
+
+
+
+
+                    console.log('瀑布流加载中。。。');
+                    let itemBox=document.querySelector('.itemBox');
+                    console.log(itemBox);
+                    let itemList=itemBox.querySelectorAll('.item');
+                    console.log(itemList);
+
+                    let itemBoxW=itemBox.offsetWidth,
+                        itemW=itemList[0].offsetWidth,
+                        column=parseInt(itemBoxW/itemW),
+                        distance=(itemBoxW-itemW*column)/(column-1);
+
+                        //  定义一个存储每列高度的容器
+                        let arr=[];
+
+
+                        waterFull()
+
+                        console.log(column);
+                        console.log(distance);
+
+                    //  实现瀑布路布局的方法
+                        function waterFull(){
+                            for(let i=0;i<itemList.length;i++){
+                                if(i<column){
+                                    itemList[i].style.top='0'+'px';
+                                    itemList[i].style.left=i*itemW+distance+'px';
+                                    arr[i]=itemList[i];
+                                    
+                                }else{
+                                 //  获取到arr中的最小值
+                                let {minIndex,minHeght}=  getMinHeight(arr);
+                                 itemList[i].style.top=minHeght+'px';
+                                 itemList[i].style.left=minIndex*itemW+distance+'px';
+                                 arr[minIndex]=itemList[i];
+                                }
+                            }
+                            
+                        }
+
+                        function getMinHeight(arr){
+                            console.log(arr[0].offsetTop);
+                            let minHeght=arr[0].offsetHeight+arr[0].offsetTop;
+                            let minIndex=0;
+
+                            //  实际高度=定位高度加上自身高度
+                            for(let i=1;i<arr.length;i++){
+                                let curHeight=arr[i].offsetHeight+arr[i].offsetTop;
+                                if(curHeight<minHeght){
+                                    minHeght=curHeight;
+                                    minIndex=i;
+                                }
+                            }
+
+                            return {minIndex,minHeght}
+                            
+                        }
+
+
+//  触发滚动条加载时间
+ window.onscroll=function(){
+     console.log('hahahha');
+     if (window.pageYOffset + window.innerHeight > getMinHeight(arr).minHeght) {
+                var json = [
+                    { "src": "./images/P_000.jpg" },
+                    { "src": "./images/P_001.jpg" },
+                    { "src": "./images/P_002.jpg" },
+                    { "src": "./images/P_003.jpg" },
+                    { "src": "./images/P_004.jpg" },
+                    { "src": "./images/P_005.jpg" },
+                    { "src": "./images/P_006.jpg" },
+                    { "src": "./images/P_007.jpg" },
+                    { "src": "./images/P_008.jpg" },
+                    { "src": "./images/P_009.jpg" },
+                    { "src": "./images/P_010.jpg" }
+                ];
+                for (var i = 0; i < json.length; i++) {
+                    var div = document.createElement('div');
+                    div.className = 'item';
+                    var img = document.createElement('img');;
+                    img.src = json[i].src;
+                    div.appendChild(img);
+                    itemBox.appendChild(div);
+                }
+                console.log('查看图片列表')
+                console.log(itemList)
+                waterFull();
+
+
+            }
+
+ }
+
+
+
+                        console.log(arr);
+                }
+            </script>
+    
+</body>
+</html>

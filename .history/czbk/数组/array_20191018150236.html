@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title></title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="">
+    </head>
+    <body>
+        <!--[if lt IE 7]>
+            <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="#">upgrade your browser</a> to improve your experience.</p>
+        <![endif]-->
+        
+        <script  async defer>
+            //  数组是一种数据状态
+            // Number String 
+        /*     let n1=6;
+            let names=[1,2,3,45,6];
+            console.log(names); */
+
+            // 可以存储不同类型的值，但是不推荐这么用
+
+            let sum=0,avg=0;
+
+            let arr=[1,0.2,2,3,10,78,82,43,4,5,6,7,8,9];
+            for(let i=0;i<arr.length;i++){
+                sum+=arr[i]
+            }
+            avg=sum/arr.length;
+            console.log('数组和'+sum);
+            console.log('平均值'+avg);
+
+            //  方法一
+            // let min=Math.min.apply(null,arr);
+            // let max=Math.max.apply(null,arr)
+            // console.log(min);
+            // console.log(max)
+
+            //  方法二
+
+            // let max=arr[0],min=arr[0];
+
+
+            // for(let i=0;i<arr.length;i++){
+            //     max=arr[i]>=max?arr[i]:max;
+            //     min=arr[i]<=min?arr[i]:min
+            // }
+            // console.log('最大值',max);
+            // console.log('最小值',min);
+
+            let numbers=[2,3,4,54,65,3,21,0,3,0,32,0,433,0,43];
+            let newArr=[];
+            for(let i=0;i<numbers.length;i++){
+                if(numbers[i]!==0){
+                    newArr[newArr.length]=numbers[i];
+                }
+            }
+
+            // newArr=numbers.filter(item=>item!==0);
+            console.log('找出非零数组');
+            console.log(newArr);
+
+            let reverseArr=[];
+
+            // for(let i=arr.length-1;i>=0;i--){
+            //     reverseArr[reverseArr.length]=arr[i]
+            // }
+            
+
+            reverseArr=arr.reverse();
+
+            console.log('查看反转数组');
+
+
+            console.log(arr);
+            console.log(reverseArr);
+
+
+
+
+
+
+
+        </script>
+    </body>
+</html>

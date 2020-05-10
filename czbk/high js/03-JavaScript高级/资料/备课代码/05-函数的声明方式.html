@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    // 函数声明
+    // function fn() {
+    // }
+    // 函数表达式
+    // var fn = function () {
+    // }
+
+    // 函数声明和函数表达式的区别，几乎无区别
+    // 函数提升的时候的区别
+    
+    // new Function()  
+    // 不推荐使用这种方式，但是通过这种方式更容易理解函数是对象
+    var fn = new Function('a', 'b', 'console.log(a + b)');
+    fn(5, 6);
+    console.log(fn.constructor);
+  </script>
+</body>
+</html>
