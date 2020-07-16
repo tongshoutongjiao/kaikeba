@@ -1,0 +1,339 @@
+* {
+    padding: 0;
+    margin: 0;
+}
+
+html,
+body {
+    width: 100%;
+    height: 100%;
+    background: #F3F8FB;
+    color: rgba(0, 0, 0, 0.35);
+}
+
+.container {
+    box-sizing: border-box;
+    padding-top: 2rem;
+}
+
+/* top */
+
+.container .top {
+    margin-bottom: 3rem;
+}
+
+.container .top .title {
+    width: 100%;
+    box-sizing: border-box;
+    padding-left: 16px;
+    padding-right: 16px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 1.4rem;
+    line-height: 22px;
+    margin-bottom: 1.1rem;
+}
+
+.container .top .title span:nth-child(1) {
+    font-weight: 500;
+}
+
+.container .top .title span:nth-child(2) {
+    display: inline-block;
+    width: 8rem;
+    height: 2rem;
+    background: #BFE0FF;
+    text-align: center;
+    border-radius: 2rem;
+    font-size: 1.2rem;
+}
+
+.container .label {
+    width: 34.3rem;
+    height: 8.6rem;
+    margin: 0 auto;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    align-items: center;
+    background: #fff;
+    box-shadow: 0px .2rem .4rem 0px rgba(0, 0, 0, 0.04);
+    border-radius: .8rem;
+}
+.container .label .item{
+    width: 33.3%;
+    text-align: center;
+}
+
+.container .label .item span {
+    display: inline-block;
+    width: 100%;
+}
+
+.container .label .item span:nth-child(1) {
+    font-size: 1.2rem;
+    line-height: 2rem;
+    font-weight: 400;
+    margin-bottom: .8rem;
+}
+
+.container .label .item span:nth-child(2) {
+    line-height: 2.2rem;
+    font-weight: 500;
+    color: #1890FF;
+}
+
+/* top */
+
+/* center */
+.container .center .center-title {
+    width: 34.3rem;
+    line-height: 2.2rem;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    font-size: 1.2rem;
+    margin-bottom: 1rem;
+}
+
+.container .center .center-title span:nth-child(1) {
+    font-size: 1.4rem;
+    font-weight: 500;
+}
+
+/* 轮播图 */
+.container .center .detail {
+    width: 100%;
+}
+
+.container .center .detail .swiper-container {
+    width: 100%;
+
+}
+
+.swiper-slide {
+    width: 82%;
+    padding: 0 2%;
+}
+
+.swiper-wrapper:nth-child(1) {
+    margin-left: 0;
+}
+
+.swiper-slide .card {
+    width: 100%;
+    background: rgba(255, 255, 255, 1);
+    border-radius: 8px;
+    box-shadow: 0px 2px 12px 0px rgba(0, 0, 0, 0.12);
+}
+
+.swiper-slide .info {
+    position: relative;
+    display: flex;
+    height: 18.8rem;
+    box-sizing: border-box;
+    padding: 2rem 1.6rem 0;
+    /* border-bottom: 1px solid rgba(0, 0, 0, 0.06); */
+}
+
+.swiper-slide .info .btm-line {
+    position: absolute;
+    bottom: 0;
+    width: 26.9rem;
+    height: .1rem;
+    margin: 0 auto;
+    background: rgba(0, 0, 0, 0.06);
+}
+
+
+.card .info .info-left {
+    width: 15.9rem;
+    border-right: .1rem solid rgba(0, 0, 0, 0.06);
+}
+
+.info-intro,
+.info-auth {
+    color: #1890FF;
+    font-size: 1.2rem;
+    line-height: 2rem;
+    margin-bottom: .2rem;
+}
+
+.info-person {
+    margin-top: 2.7rem;
+    display: flex;
+    margin-bottom: 1.7rem;
+}
+
+.info-person .avator {
+    display: inline-block;
+    width: 4rem;
+    line-height: 4rem;
+    text-align: center;
+    border-radius: .4rem;
+    background: #1890FF;
+    margin-right: 1rem;
+}
+
+.info-person .avator i {
+    display: inline-block;
+    width: 1.6rem;
+    height: 1.6rem;
+    background: url(../img/avator.png) no-repeat center center;
+    background-size: cover;
+}
+
+.info-person .info-name span:nth-child(1) {
+    font-weight: 500;
+    font-size: 1.4rem;
+    display: inline-block;
+    width: 100%;
+    color: rgba(0, 0, 0, 0.85);
+}
+
+.info-person .info-name span:nth-child(2) {
+    font-weight: 400;
+    font-size: 1.2rem;
+    display: inline-block;
+    width: 100%;
+}
+
+.info-part span {
+    display: inline-block;
+    margin-right: .6rem;
+
+}
+
+.info-right {
+    text-align: right;
+}
+
+.info-right .ask,
+.info-right .sys,
+.info-right .count {
+    margin-bottom: .8rem;
+
+}
+
+.info-right .ask span,
+.info-right .sys span,
+.info-right .count span {
+    display: inline-block;
+    width: 100%;
+}
+
+.info-right .ask span:nth-child(2),
+.info-right .sys span:nth-child(2),
+.info-right .count span:nth-child(2) {
+    font-size: 1.4rem;
+    color: rgba(0, 0, 0, 0.65);
+}
+
+.reason {
+    position: relative;
+    width: 100%;
+    height: 12.9rem;
+}
+
+.reason .reason-text {
+    position: absolute;
+    top: 1.6rem;
+    left: 1.6rem;
+    padding-right: 1rem;
+    border-right: 0.1rem solid rgba(0, 0, 0, .35);
+}
+
+.reason textarea {
+    display: inline-block;
+    width: 100%;
+    height: 100%;
+    padding: 1.6rem;
+    box-sizing: border-box;
+    border: none;
+    overflow-y: scroll;
+    text-indent: 5.9rem;
+    font-size: 1.4rem;
+    outline: none;
+}
+
+/* bottom 按钮 */
+
+.bottom {
+    margin-top: 7rem;
+    display: flex;
+    text-align: center;
+    line-height: 4rem;
+    color: #fff;
+}
+
+.bottom .btn-left {
+    width: 50%;
+    background: linear-gradient(45deg, rgba(251, 71, 89, 1) 0%, rgba(245, 34, 45, 1) 100%);
+    box-shadow: 0px -1px 4px 0px rgba(0, 0, 0, 0.12);
+    border-radius: 20px 0px 0px 20px;
+}
+
+.bottom .btn-right {
+    width: 50%;
+    background: linear-gradient(225deg, rgba(95, 214, 170, 1) 0%, rgba(49, 173, 113, 1) 100%);
+    box-shadow: 0px -1px 4px 0px rgba(0, 0, 0, 0.12);
+    border-radius: 0px 20px 20px 0px;
+
+}
+
+.mask {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, .4);
+    z-index: 10;
+}
+
+.mask .confirm-box {
+    width: 27rem;
+    /* height: 14rem; */
+    background: rgba(255, 255, 255, 1);
+    border-radius: 1.2rem;
+    opacity: 0.98;
+    margin: 24.8rem auto;
+}
+.mask .confirm-box .title{
+    text-align: center;
+    display: inline-block ;
+    width: 100%;
+    line-height: 4.9rem;
+    font-size: 1.6rem;
+    color: #000;
+}
+.mask .confirm-box textarea{
+    width:24rem ; 
+    height: 5.2rem;
+    margin-left: 1.4rem;
+    background:rgba(241,241,241,1);
+    box-shadow:0px 0px 1px 0px rgba(0,0,0,0.25);
+    border-radius:4px;
+    resize: none;
+    border: none;
+    text-indent: .5rem;
+}
+.mask .confirm-box .select-btn{
+    display: inline-block;
+    width: 100%;
+    text-align: center;
+    line-height: 3.9rem;
+    font-size: 1.4rem;
+    display: flex;
+}
+.mask .confirm-box .select-btn span{
+    display: inline-block;
+    width: 50%;
+    text-align: center;
+}
+.mask .confirm-box .select-btn span:nth-child(2){
+    color: #1890FF;
+    border-left: .1rem solid #1890FF;
+
+}

@@ -1,0 +1,451 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>待办详情</title>
+    <link rel="stylesheet" href="css/swiper.min.css">
+    <link rel="stylesheet" href="./css/detail.css">
+
+</head>
+
+<body>
+    <div class="container" id="container">
+        <div class=" top">
+            <div class="title">
+                <span>基础信息</span>
+                <span @click="lookForFlow">申请流程</span>
+            </div>
+            <div class="label">
+                <div class=" item type">
+                    <span>权限类型</span>
+                    <span>{{listInfo.type=='add'?'新增权限':listInfo.type=='fix'?'编辑权限':'删除权限'}} </span>
+                </div>
+                <div class="item tool">
+                    <span>工具</span>
+                    <span>{{listInfo.tool}}</span>
+
+                </div>
+                <div class="item count">
+                    <span>人员统计</span>
+                    <span>1个</span>
+                </div>
+            </div>
+
+        </div>
+        <div class=" center">
+            <div class="center-title">
+                <span>详情</span>
+                <span>{{curSlideIndex}}/{{applyList.length}}</span>
+            </div>
+            <div class="detail">
+                <div class="swiper-container">
+
+                    <div class="swiper-wrapper">
+
+
+
+
+
+                        <!-- 
+                        <div class="swiper-slide">
+                            <div class="card">
+                                <div class="info">
+                                    <div class="info-left">
+                                        <div class="info-intro">
+                                            申请人信息
+                                        </div>
+                                        <div class="info-person">
+                                            <div class="avator">
+                                                <i></i>
+                                            </div>
+                                            <div class="info-name">
+                                                <span>楚留香</span>
+                                                <span>18100495</span>
+                                            </div>
+                                        </div>
+                                        <div class="info-part">
+                                            <span>自有人员</span>
+                                            <span>|</span>
+                                            <span>四部一室</span>
+                                        </div>
+
+                                    </div>
+                                    <div class="info-right">
+                                        <div class="info-auth">
+                                            权限信息
+                                        </div>
+                                        <div class="ask">
+                                            <span>申请权限</span>
+                                            <span>配置管理员</span>
+                                        </div>
+                                        <div class="sys">
+                                            <span>系统名称</span>
+                                            <span>单证管理系统</span>
+                                        </div>
+                                        <div class="count">
+                                            <span>账号信息</span>
+                                            <span>18100495</span>
+                                        </div>
+
+                                    </div>
+                                    <div class="btm-line"></div>
+                                </div>
+                                <div class="reason">
+                                    <div class="reason-text">申请原因</div>
+                                    <textarea name="reason" id="commit-reason" cols="30" rows="10"></textarea>
+                                </div>
+
+                            </div>
+                        </div> -->
+
+                        <div v-for="(item,index) in applyList" class="swiper-slide">
+                            <div class="card">
+                                <div class="info">
+                                    <div class="info-left">
+                                        <div class="info-intro">
+                                            申请人信息
+                                        </div>
+                                        <div class="info-person">
+                                            <div class="avator">
+                                                <i></i>
+                                            </div>
+                                            <div class="info-name">
+                                                <span>{{item.name}}</span>
+                                                <span>{{item.userNo}}</span>
+                                            </div>
+                                        </div>
+                                        <div class="info-part">
+                                            <span>{{item.type}}</span>
+                                            <span>|</span>
+                                            <span>{{item.part}}</span>
+                                        </div>
+
+                                    </div>
+                                    <div class="info-right">
+                                        <div class="info-auth">
+                                            权限信息
+                                        </div>
+                                        <div class="ask">
+                                            <span>申请权限</span>
+                                            <span>{{item.authName}}</span>
+                                        </div>
+                                        <div class="sys">
+                                            <span>系统名称</span>
+                                            <span>{{item.sysName}}</span>
+                                        </div>
+                                        <div class="count">
+                                            <span>账号信息</span>
+                                            <span>{{item.count}}</span>
+                                        </div>
+
+                                    </div>
+                                    <div class="btm-line"></div>
+                                </div>
+                                <div class="reason">
+                                    <div class="reason-text">申请原因</div>
+                                    <textarea name="reason" cols="30" rows="10" v-model="item.reason"></textarea>
+                                </div>
+                            </div>
+
+                        </div>
+
+
+
+                    </div>
+
+
+                </div>
+
+            </div>
+        </div>
+        <div class=" bottom">
+            <div class="btn-left" @click="recallConfigInfo">
+                <span>全部退回</span>
+            </div>
+            <div class="btn-right" id="accept" @click="checkedInfoByAjax">
+                <span>全部通过</span>
+            </div>
+
+        </div>
+
+        <div class="mask" v-show="cancelFlag" style="display: none;">
+            <div class="confirm-box">
+                <span class="title">确定全部退回吗？</span>
+                <textarea placeholder="请输入审核意见(最多200字)" cols="30" rows="10" maxlength="200"
+                    v-model="opinion"></textarea>
+                <div class="select-btn">
+                    <span @click="cancelRecall">取消</span>
+                    <span @click="recallInfo">确定</span>
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+
+
+
+    <script src="./js/vue.min.js"></script>
+    <script src="./js/jquery-3.5.1.min.js"></script>
+    <script src="./js/resize.js"></script>
+    <script src="js/swiper.min.js"></script>
+    <script>
+
+    </script>
+
+
+    <script>
+        $(document).ready(() => {
+            let vm = new Vue({
+                el: '#container',
+                data: {
+                    cancelFlag: false,
+                    detailDataList: [],
+                    opinion: '',
+                    listInfo: {},
+                    curSlideIndex:1,
+                    applyList: [{
+                        name: '王二狗', // 名称
+                        userNo: '12121232', // 用户账号
+                        type: '厂商人员', // 人员类型
+                        part: '四部一室', // 部门名称
+                        authName: '申请权限', // 权限名称
+                        sysName: '单位管理系统', // 所在单位名称
+                        count: '1218213', //账号信息
+                        reason: '工作需要', // 申请理由
+                    }], // 轮播图数据
+                },
+                mounted() {
+                    console.log('点击查看详情页面挂载函数');
+                    console.log(location.href);
+                    this.listInfo = this.handleWithUrl(location.href.split('?')[1]);
+                    console.log(this.listInfo);
+
+                    //  模拟数据
+                    this.applyList = this.getMockListData(20);
+
+                    // 掉接口获取数据
+                    // this.getCardDataByAjax();
+
+                    //  初始化滑动数据
+                    setTimeout(() => {
+                        this.initSwipper()
+                    }, 10)
+
+                },
+                methods: {
+                    recallConfigInfo() {
+                        console.log('quit');
+                        console.log('撤回提出的申请信息');
+                        console.log(this.applyList);
+                        this.cancelFlag = true;
+                    },
+                    cancelRecall() {
+                        console.log('取消撤回消息');
+                        console.log(this.opinion);
+                        this.cancelFlag = false;
+                    },
+                    recallInfo() {
+                        console.log('确认撤回消息');
+
+                        //  调接口发送数据
+                        this.recallInfoByAjax();
+                    
+                       
+                    },
+
+                    //  处理页面返回的参数
+                    handleWithUrl(str) {
+                        console.log(str)
+                        let objArray = [];
+                        str && str.split('&');
+
+                        if (str) {
+                            objArray = str.split('&')
+                        } else {
+                            return '';
+                        }
+                        let obj = {};
+                        objArray.forEach((item) => {
+                            let tempArr = item.split('=');
+                            obj[tempArr[0]] = decodeURIComponent(tempArr[1]);
+                        })
+
+                        return obj;
+                    },
+
+                    //  初始化swipper组件
+                    initSwipper() {
+
+                        let that=this;
+                        var mySwiper = new Swiper('.swiper-container', {
+                            roundLengths: false,
+                            initialSlide: 0,
+                            speed: 600,
+                            slidesPerView: "auto",
+                            centeredSlides: true,
+                            followFinger: true,
+                            loop: true,
+                            onSlideChangeEnd: function (swiper) {
+                                console.log('查看swipper切换效果')
+                                let index=$('.swiper-slide-active').attr('data-swiper-slide-index');
+                                that.curSlideIndex=++index;
+                                // alert(swiper.activeIndex) //切换结束时，告诉我现在是第几个slide
+                            },
+                            
+                        })
+
+
+                    },
+
+                    // 获取模拟数据
+                    getMockListData(num) {
+                        let data = [];
+                        let typeArray = ['自有人员', '厂商人员'];
+                        let nameList = ['小明', '小刚', '小花', '小李', '小赵', '小周', '小韩', '小吴', '小张', '二狗子',
+                            '三德子'
+                        ];
+                        let partName = ['一部一室', '一部二室', '一部三室', '一部四室', '一部五室', '二部一室', '三部一室', '四部一室'];
+                        let authName = ['门禁', '二楼', '四楼'];
+                        let count = ['121', '3232', '3232323', '3221', '32788', '7438', '32328'];
+                        let sysName = ['硬件管理系统', '软件管理系统', '楼道管理系统']
+
+                        // name: '王二狗', // 名称
+                        // userNo: '12121232', // 用户账号
+                        // type: '厂商人员', // 人员类型
+                        // part: '四部一室', // 部门名称
+                        // authName: '申请权限', // 权限名称
+                        // sysName: '单位管理系统', // 所在单位名称
+                        // count: '1218213', //账号信息
+                        // reason: '工作需要', // 申请理由
+
+
+                        for (let i = 0; i < num; i++) {
+                            data.push({
+                                type: typeArray[this.getRandomNum(0, typeArray.length)],
+                                name: nameList[this.getRandomNum(0, nameList.length)],
+                                part: partName[this.getRandomNum(0, partName.length)],
+                                authName: authName[this.getRandomNum(0, authName.length)],
+                                userNo: count[this.getRandomNum(0, count.length)],
+                                count: count[this.getRandomNum(0, count.length)],
+                                sysName: sysName[this.getRandomNum(0, sysName.length)],
+                                reason: ''
+                            })
+
+                        }
+                        return data;
+                    },
+
+                    // 获取随机数
+                    getRandomNum(min, max) {
+                        max = max - 1;
+                        return Math.floor(Math.random() * (max - min + 1) + min);
+                    },
+
+                    //  查看流程数据
+                    lookForFlow(){
+                        console.log('申请流程');
+                        console.log('点击跳转到流程页面了');
+                        location.href='./flow.html'
+                    },
+
+                    //  获取ajax数据
+                    //  调用接口函数
+                    getCardDataByAjax(){
+                        $.ajax({
+                            url:'http://www.card.com',
+                            type:'get',
+                            dataType:'json',
+                            data:{
+                                id:1,
+                                name:'test'
+                            },
+                            success(res){
+                                console.log('查看接口数据');
+                                console.log(res);
+                                if(res.code=='200'){
+                                    this.listData=res.data;
+                                }
+
+                            },
+                            error(err){
+                                console.log('接口调用失败');
+                                console.log(err);
+                            }
+
+                        })
+                    },
+
+                    // 撤回全部消息
+                    recallInfoByAjax(){
+                        $.ajax({
+                            url:'http://www.test.com/recall',
+                            type:'get',
+                            dataType:'json',
+                            data:{
+                                id:1,
+                                name:'test'
+                            },
+                            success(res){
+                                console.log('查看接口数据');
+                                console.log(res);
+                                if(res.code=='200'){
+                                    window.alert('撤回成功');
+                                    this.cancelFlag = false;
+                                }
+                            },
+                            error(err){
+                                console.log('接口调用失败');
+                                console.log(err);
+                                window.alert('撤回失败,请检查网络');
+                                this.cancelFlag = false;
+                            }
+
+                        })
+
+                    },
+
+                    // 点击通过
+                    checkedInfoByAjax(){
+                        console.log('点击审批消息');
+                        $.ajax({
+                            url:'http://www.test.com/recall',
+                            type:'get',
+                            dataType:'json',
+                            data:{
+                                id:1,
+                                name:'test'
+                            },
+                            success(res){
+                                console.log('查看接口数据');
+                                console.log(res);
+                                if(res.code=='200'){
+                                    window.alert('审批成功');
+                                    this.cancelFlag = false;
+                                }
+                            },
+                            error(err){
+                                console.log('接口调用失败');
+                                console.log(err);
+                                window.alert('审批,请检查网络');
+                                this.cancelFlag = false;
+                            }
+                        })
+
+                    }
+
+                },
+
+            })
+
+        })
+    </script>
+
+
+
+
+</body>
+
+</html>

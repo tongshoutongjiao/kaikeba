@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+        content="width=device-width,initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>待办列表</title>
+    <link rel="stylesheet" href="./css/list.css">
+</head>
+
+<body>
+    <div class="content list  " id="contentList">
+        <div class="item" v-for="(item,index) in listData" :key="index" @click="goToDetail($event,item)">
+            <template v-if="item.type=='add'">
+                <span class="bar"></span>
+                <span class="auth">
+                    <span class="auth-name">新增权限</span>
+                    <span class="auth-type">{{item.tool}}</span>
+                </span>
+                <span class="info">
+                    <span>{{item.name}}</span>
+                    <span>|</span>
+                    <span>{{item.partName}}</span>
+                </span>
+
+            </template>
+            <template v-else-if="item.type=='fix'">
+                <span class="bar fix"></span>
+                <span class="auth">
+                    <span class="auth-name">修改权限</span>
+                    <span class="auth-type">{{item.tool}}</span>
+                </span>
+                <span class="info">
+                    <span>{{item.name}}</span>
+                    <span>|</span>
+                    <span>{{item.partName}}</span>
+                </span>
+            </template>
+            <template v-else>
+                <span class="bar delete "></span>
+                <span class="auth">
+                    <span class="auth-name">删除账号或权限</span>
+                    <span class="auth-type">{{item.tool}}</span>
+                </span>
+                <span class="info">
+                    <span>{{item.name}}</span>
+                    <span>|</span>
+                    <span>{{item.partName}}</span>
+                </span>
+            </template>
+
+        </div>
+    </div>
+    <script src="./js/resize.js"></script>
+    <script src="./js/jquery-3.5.1.min.js"></script>
+    <script src="./js/vue.min.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            let vm = new Vue({
+                el: '#contentList',
+                data: {
+                    listData: [],
+                },
+                mounted() {
+                    this.getListData();
+                },
+                methods: {
+                    getListData() {
+                        console.log('data');
+                        this.listData = this.getMockData(100);
+                        console.log('查看模拟数据');
+                        console.log(this.listData);
+                        this.getListDataByAjax()
+
+                        // console.log()
+                    },
+
+                    //  模拟数据
+                    getMockData(num) {
+                        let data = [];
+
+                        let typeArray = ['add', 'fix', 'delete'];
+                        let nameList = ['小明', '小刚', '小花', '小李', '小赵', '小周', '小韩', '小吴', '小张'];
+                        let partName = ['一部一室', '一部二室', '一部三室', '一部四室', '一部五室', '二部一室', '三部一室', '四部一室'];
+                        let tool = ['Git', 'Qc', 'Synergy'];
+
+                        for (let i = 0; i < num; i++) {
+                            data.push({
+                                type: typeArray[this.getRandomNum(0, typeArray.length)],
+                                name: nameList[this.getRandomNum(0, nameList.length)],
+                                partName: partName[this.getRandomNum(0, partName.length)],
+                                tool: tool[this.getRandomNum(0, tool.length)]
+                            })
+                        }
+                        return data;
+                    },
+
+                    //  随机数
+                    getRandomNum(min, max) {
+                        max = max - 1;
+                        return Math.floor(Math.random() * (max - min + 1) + min);
+                    },
+
+                    //  跳转到详情页面
+                    goToDetail(e, item) {
+                        //  字符串化参数
+                        let str = this.stringToParams(item);
+
+                        location.href = `./detail.html?${str}`;
+                    },
+
+                    // 字符串转参数
+                    stringToParams(param) {
+                        let tempArray = [],
+                            str = '';
+                        for (let key in param) {
+                            tempArray.push(`${key}=${param[key]}`)
+                        }
+                        str = tempArray.join('&');
+                        return str;
+                    },
+
+                    //  调用接口函数
+
+                    getListDataByAjax(){
+                        $.ajax({
+                            url:'http://www.test.com',
+                            type:'get',
+                            dataType:'json',
+                            data:{
+                                id:1,
+                                name:'test'
+                            },
+                            success(res){
+                                console.log('查看接口数据');
+                                console.log(res);
+                                if(res.code=='200'){
+                                    this.listData=res.data;
+                                }
+
+                            },
+                            error(err){
+                                console.log('接口调用失败');
+                                console.log(err);
+                            }
+
+                        })
+                    }
+                },
+            })
+        })
+    </script>
+</body>
+
+</html>
