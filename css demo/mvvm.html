@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>感受一下mvvm</title>
+</head>
+
+<body>
+    <div id="app">
+        <h3>姓名</h3>
+        <p>{{name}}</p>
+        <h3>年龄</h3>
+        <p>{{age}}</p>
+    </div>
+
+    <script>
+        //  定义Vue 类别
+        function Vue(opt) {
+            this.opt = opt;
+            this.observe(opt.data);
+            let root = document.querySelector(opt.el);
+            this.compile(root);
+        }
+
+        Vue.prototype.observe = function (data) {
+
+            Object.keys(data).forEach(key => {
+
+
+                //  创建观察者对象
+                let obv = new Observer();
+
+                //   绑定所有属性值
+                data[`_${key}`] = data[key];
+                console.log(data);
+
+                //  通过getter setter 暴露for 循环中作用域下的obv，闭包产生
+
+                Object.defineProperty(data, key, {
+                    get() {
+                        console.log('设置元素');
+                       console.log(key);
+                        console.log(Observer.target);
+                        Observer.target && obv.addSubNode(Observer.target);
+                        return data[`_${key}`]
+                    },
+                    set(newVal) {
+                        obv.update(newVal)
+                        data[`_${key}`] = newVal;
+                    }
+                })
+
+
+
+
+
+
+            })
+
+
+
+
+
+
+        }
+        Vue.prototype.compile = function (node) {
+            console.log('编译函数');
+            console.log(node);
+            [].forEach.call(node.childNodes, child => {
+                if (!child.firstElementChild && /\{\{(.*)\}\}/.test(child.innerHTML)) {
+                    let key = RegExp.$1.trim();
+                    child.innerHTML = child.innerHTML.replace(new RegExp('\\{\\{\\s*' + key + '\\s*\\}\\}',
+                        'gm'), this.opt.data[key]);
+                    Observer.target = child;
+                    this.opt.data[key];
+                    Observer.target = null
+                } else if (child.firstElementChild) this.compile(child)
+            })
+
+
+        }
+
+
+
+
+
+
+        // //  观察者类
+        function Observer(opt) {
+            this.subNode = [];
+        }
+
+        //  添加节点
+
+        Observer.prototype.addSubNode = function (node) {
+            this.subNode.push(node)
+        }
+
+        //  更新节点
+        Observer.prototype.update = function (newVal) {
+            this.subNode.forEach(node=>{
+                node.innerHTML = newVal;
+            })
+        }
+
+
+
+
+
+
+
+
+
+
+
+        //  实例化
+
+        window.onload = function () {
+            let opt = {
+                el: '#app',
+                data: {
+                    name: '检索中...',
+                    age: 28
+                }
+            }
+
+            let vm = new Vue(opt)
+
+            setTimeout(() => {
+                console.log('heiheihei')
+                // opt.data.name = '赵海龙';
+
+            }, 2000);
+
+
+
+
+        }
+    </script>
+
+</body>
+
+</html>
