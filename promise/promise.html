@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        // promise.js 
+        let pms = new Promiser(fn);
+
+        // 实际处理函数 
+        function fn(res, rej) {
+            // res('还可以传参哦');
+            setTimeout(() => {
+                console.log('任务执行完了')
+                res()
+            }, 1500)
+        }
+
+
+
+        // promise 接收一个成功回调，一个失败回调
+        // then 方法
+        // 三种状态 pending rejected resolve 
+
+
+        function Promiser(executor) {
+
+            let self = this;
+            self.value = undefined; // 定义成功返回的值
+            self.reason = undefined; // 定义失败返回的值
+            self.status = 'pending'; // 查看状态
+            self.onFulFilledCallbacks = []; // 成功回调
+            self.onRejectedCallbacks = []; // 失败回调
+
+
+            // executor(resolve, reject)
+
+            function resolve(value) {
+                if (self.status === 'pending') {
+                    self.value = value;
+                    self.status = 'resolved';
+                    self.onFulFilledCallbacks.forEach(onFulFiled => {
+                        onFulFiled();
+                    })
+                }
+
+            }
+
+            function reject(reason) {
+                if (self.status === 'pending') {
+                    self.reason = reason;
+                    self.status = 'rejected';
+
+                    //  执行回调函数
+                    self.onRejectedCallbacks.forEach(onReject => {
+                        onReject();
+                    })
+                }
+            }
+
+            try {
+                // 实参
+                executor(resolve, reject)
+            } catch (error) {
+                reject(error)
+            }
+        }
+
+
+        Promiser.prototype.then = function (onFulFilled, onRejected) {
+
+            // p2的resolve在里面，外边拿不到
+            let p2Resolve;
+            let p2Reject;
+            let p2=new Promiser((resolve,reject)=>{
+                p2Resolve=resolve;
+                p2Reject=reject;
+            });
+
+
+
+            if (this.status === 'pending') {
+                this.onFulFilledCallbacks.push(() => {
+                    console.log('判断成功状态');
+                    onFulFilled(this.value)
+                    p2Resolve()
+                });
+                this.onRejectedCallbacks.push(() => {
+                    onRejected(this.reason)
+                    p2Reject()
+                })
+            } else if (this.status === 'resolved') {
+                console.log('直接执行')
+                onFulFilled(this.value);
+                p2Resolve();
+            } else {
+                onRejected(this.reason)
+                p2Reject()
+            }
+            return p2
+
+        }
+
+        // 调用then函数
+        pms.then(val => {
+            console.log('第一个回调成功');
+
+        }, reason => {
+            console.log('fail', reason)
+        }).then(res=>{
+            console.log('第二个回调成功')
+
+        },err=>{
+
+        })
+
+        // pms.then(val=>{
+        //     console.log('success3',val)
+        // },reason=>{
+        //     console.log('fail3',reason)
+        // })
+    </script>
+</body>
+
+</html>
