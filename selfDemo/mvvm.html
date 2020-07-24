@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>感受一下mvvm</title>
+</head>
+
+<body>
+    <div id="app">
+        <h3>姓名</h3>
+        <p>{{name}}</p>
+        <h3>年龄</h3>
+        <p>{{age}}</p>
+    </div>
+    <script src="./mvvm2.js"></script>
+    <script>
+        console.log('最新结果');
+        console.log(Vue);
+
+        //  实例化对象
+        //  
+
+   
+
+       window.onload=function(){
+        let opt={
+            el:'#app',
+            data:{
+                name:'检索中...',
+                age:30
+            }
+        }
+        let vue =new Vue(opt);
+
+        setTimeout(()=>{
+            opt.data.name='赵海龙'
+        },2000)
+        
+
+       }
+
+
+
+    </script>
+</body>
+
+</html>

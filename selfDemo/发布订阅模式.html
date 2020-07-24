@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+
+
+        //  方式一
+        //  缺点：发布的时候，讲所有订阅过的函数都打印出来了，
+        // let crop={};// 自定义对象
+
+        // //  缓存回调函数
+        // crop.list=[];
+
+        // // 订阅时间
+        // crop.on=function(fn){
+        //     console.log('订阅函数名称');
+
+        //     this.list.push(fn);
+        // }
+
+        // // 发布事件
+        // crop.emit=function(){
+        //     // 当发布的时候再把列表中存的函数依次执行
+        //     this.list.forEach(cb=>{
+        //         cb.apply(this,arguments)
+        //     })
+        // };
+
+
+        // //  测试用例
+
+        // crop.on(function(pos,sal){
+        //     console.log('你的职位是'+pos);
+        //     console.log('期望的薪水'+sal)
+        // })
+
+        // crop.on(function(skill,hobby){
+        //     console.log('你的技能'+skill);
+        //     console.log('爱好:'+hobby)
+        // });
+
+
+        // crop.emit('前端',10000)
+        // crop.emit('端茶和倒水','code');
+
+
+        // 方式二
+        // let crop={};
+
+        // //  用对象来作为缓存列表
+        // crop.list={};
+
+        // // // 订阅事件
+
+        // crop.on=function(key,fn){
+        //     // 如果对象中没有对应的key值
+        //     // 也就说明没有订阅过
+        //     //  那就给key 创建个缓存列表
+        //     if(!this.list[key]){
+        //         this.list[key]=[];
+        //     }
+
+        //     //  把当前函数添加到对应的key的缓存列表里
+        //     this.list[key].push(fn)
+        // }
+
+        // // //  发布
+        // crop.emit=function(){
+        //     // 第一个参数是对应的key值
+        //     // 直接用数组的shift方法取出
+       
+        //     let key=[].shift.call(arguments),
+        //     fns=this.list[key];
+        //     // 如果缓存列表里没有函数，就返回false
+        //     if(!fns||fns.length==0){
+        //         return false;
+        //     }
+
+        //     // 遍历key值对应的缓存列表
+        //     // 依次执行函数的方法
+        //     fns.forEach(fn=>{
+        //         console.log('发布事件参数');
+        //             console.log(arguments);
+        //         fn.apply(this,arguments)
+        //     })
+        // }
+        // // 测试用例
+        // crop.on('join',(pos,sal)=>{
+        //     console.log('你期望的职位',pos);
+        //     console.log('你期望的薪资',sal);
+        // })
+
+        // crop.on('other',(skill,hobby)=>{
+        //     console.log('你擅长的技能',skill);
+        //     console.log('你感兴趣的事情',hobby)
+        // });
+
+        // crop.emit('join','前端','10000');
+        // crop.emit('join','后端开发','15000');
+        // crop.emit('other','前端开发工程师','code');
+
+
+        //  公用方式
+        let event={
+            list:{},
+            on(key,fn){
+                if(!this.list[key]){
+                    this.list[key]=[];
+                }
+                this.list[key].push(fn)
+            },
+            emit(){
+                console.log('执行函数发布事件');
+                console.log(arguments);
+                //  发布事件
+                let key=[].shift.call(arguments);
+                let fns=this.list[key];
+                if(!fns||fns.length==0){
+                    return false;
+                }
+                fns.forEach((fn)=>{
+                    // console.log(fn);
+                    fn.apply(this,arguments)
+                })
+            },
+            remove(key,fn){
+
+                // 取消订阅
+                //  取消订阅事件：
+                let fns=this.list[key];
+
+                // 如果缓存列表中没有函数，返回false
+                if(!fns) return false;
+
+                // 如果没有传对应的函数的话，则取消当前事件订阅的所有函数
+                if(!fn){
+                    fns&&(fns.length=0);
+                }else{
+                    // 遍历缓存列表，看看传入的fn与那个函数相同
+                    // 如果相同，则直接从缓存列表中删除掉即可
+                    fns.forEach((cb,i)=>{
+                        if(cb===fn){
+                            fns.splice(i,1)
+                        }
+                    })
+                }
+                
+                
+
+
+
+
+
+
+
+            }
+        }
+
+        function cat(){
+            console.log('一起喵喵喵')
+        };
+        function dog(){
+            console.log('一起汪汪汪')
+        };
+        function pig(){
+            console.log('一起哼哼哼哼哼')
+        }
+
+        event.on('pet',data=>{
+            console.log('接受数据');
+            console.log(data);
+        });
+
+        //  订阅函数
+
+        event.on('pet',dog);
+        event.on('pet',cat);
+        event.on('pet',pig);
+
+        // 取消dog订阅方法
+        event.remove('pet',dog)
+
+
+        //  发布函数
+        console.log(event);
+        event.emit('pet','二哈哈哈');
+
+     
+        let obj={
+            name:'zhl'
+        }
+
+
+        let name='赵海龙';
+
+        function testFn(){
+            console.log('查看函数的上下文指向')
+            console.log(this.name);
+            console.log(arguments);
+        }
+
+        testFn.call(obj,1,2,3,4,5,6,7,8,9);
+
+        let arrTest=[1,2,3,4,5]
+
+        let arr=[].shift.call(arrTest);
+        console.log('最新数组结构')
+        console.log(arr);
+        console.log(arrTest);
+
+
+
+    </script>
+    
+</body>
+</html>

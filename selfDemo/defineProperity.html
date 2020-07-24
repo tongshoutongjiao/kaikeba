@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>设置原型对象</title>
+</head>
+
+<body>
+    <div>原型对象</div>
+    <script>
+        let obj = {
+            name: 'zhl',
+            age: 28
+        };
+
+        Object.defineProperty(obj, 'name', {
+            get() {
+                return '呜呜呜'
+            },
+            set(newVal) {
+                console.log('设置val的值');
+                return newVal;
+            }
+        })
+
+       console.log(obj.name);
+       obj.name='我就是这样';
+       console.log(obj.name);
+    </script>
+
+</body>
+
+</html>
