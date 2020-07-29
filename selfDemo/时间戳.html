@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<div>当前时间</div>
+<div class="curTime"></div>
+
+
+
+<body>
+    <script>
+        console.log('查看最新时间');
+
+        let curEle=document.getElementsByClassName('curTime')[0];
+        console.log('查看当前时间元素');
+        console.log(curEle);
+
+        function getCurTime(val){
+            var date=new Date(val);
+            var res=date.getFullYear()+'/'+(date.getMonth()+1)+'/'+date.getDate()+' '+date.getHours()+':'+date.getMinutes()+':'+date.getSeconds();
+            return res.replace(/\-/g,"/");
+        }
+
+        let day=new Date('2020-07-01 18:00:00').getTime();
+        console.log('查看当前时间');
+        console.log(day);
+
+       var curTime=getCurTime();
+       console.log(curTime);
+       curEle.innerHTML=curTime;
+
+
+    </script>
+    
+</body>
+</html>
